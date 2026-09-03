@@ -5,7 +5,20 @@ A modern Home Assistant dashboard card for switches managed by
 switch as a responsive front panel and exposes monitoring, configuration, and diagnostics without
 requiring direct access to the switch from the browser.
 
-[![Open your Home Assistant instance and open this repository inside HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Minims&repository=tplink-easy-smart-card&category=plugin)
+[![Validate](https://github.com/Minims/tplink-easy-smart-card/actions/workflows/validate.yml/badge.svg)](https://github.com/Minims/tplink-easy-smart-card/actions/workflows/validate.yml)
+[![Release](https://img.shields.io/github/v/release/Minims/tplink-easy-smart-card)](https://github.com/Minims/tplink-easy-smart-card/releases/latest)
+[![License](https://img.shields.io/github/license/Minims/tplink-easy-smart-card)](LICENSE)
+[![Buy me a coffee](https://img.shields.io/badge/Buy_me_a_coffee-minims-FFDD00?logo=buymeacoffee&logoColor=000)](https://www.buymeacoffee.com/minims)
+
+## Companion repositories
+
+The integration and dashboard card are maintained together but installed as two separate HACS
+repositories:
+
+| Component                  | Repository                                                                          | Open in HACS                                                                                                                                                                                                                               |
+| -------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Home Assistant integration | [`Minims/hass_tplink_easy_smart`](https://github.com/Minims/hass_tplink_easy_smart) | [![Open the TP-Link Easy Smart integration in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Minims&repository=hass_tplink_easy_smart&category=integration) |
+| Dashboard card             | [`Minims/tplink-easy-smart-card`](https://github.com/Minims/tplink-easy-smart-card) | [![Open the TP-Link Easy Smart Card in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Minims&repository=tplink-easy-smart-card&category=plugin)             |
 
 ## Features
 
@@ -25,15 +38,15 @@ pages. They may report a disabled or empty configuration when the feature exists
 ## Requirements
 
 - Home Assistant with the [TP-Link Easy Smart integration](https://github.com/Minims/hass_tplink_easy_smart)
-  installed and configured. Version `2026.9.6` or newer is recommended.
+  installed and configured. Version `2026.9.7` or newer is recommended.
 - HACS with Dashboard repositories enabled, or manual installation of the release asset.
 
 ## Installation
 
 ### HACS
 
-1. Select the badge above, or add `https://github.com/Minims/tplink-easy-smart-card` as a custom
-   **Dashboard** repository in HACS.
+1. Select the Dashboard card badge above, or add `https://github.com/Minims/tplink-easy-smart-card`
+   as a custom **Dashboard** repository in HACS.
 2. Install **TP-Link Easy Smart Card** and restart Home Assistant if HACS requests it.
 3. Refresh the browser cache, then add the card from the dashboard editor.
 
