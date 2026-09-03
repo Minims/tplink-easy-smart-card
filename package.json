@@ -1,6 +1,6 @@
 {
   "name": "tplink-easy-smart-card",
-  "version": "2026.9.0",
+  "version": "2026.9.1",
   "description": "A modern Home Assistant dashboard card for TP-Link Easy Smart switches",
   "type": "module",
   "scripts": {

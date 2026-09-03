@@ -3,6 +3,12 @@
 All notable changes are documented here. Versions follow Home Assistant-style calendar versioning:
 `YYYY.M.patch`.
 
+## 2026.9.1
+
+- Add a dashboard preview and repository icon to the documentation.
+- Link the card and integration repositories with direct My Home Assistant HACS buttons.
+- Add project funding links.
+
 ## 2026.9.0
 
 - Initial HACS Dashboard release.
