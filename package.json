@@ -1,0 +1,49 @@
+{
+  "name": "tplink-easy-smart-card",
+  "version": "2026.9.0",
+  "description": "A modern Home Assistant dashboard card for TP-Link Easy Smart switches",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "check": "npm run format:check && npm run lint && npm test && npm run build"
+  },
+  "keywords": [
+    "home-assistant",
+    "lovelace",
+    "tp-link",
+    "network-switch",
+    "hacs"
+  ],
+  "author": "Minims",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Minims/tplink-easy-smart-card.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Minims/tplink-easy-smart-card/issues"
+  },
+  "homepage": "https://github.com/Minims/tplink-easy-smart-card#readme",
+  "funding": [
+    "https://ko-fi.com/minims",
+    "https://www.buymeacoffee.com/minims"
+  ],
+  "dependencies": {
+    "lit": "^3.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.9.1",
+    "globals": "^17.12.0",
+    "prettier": "^3.6.2",
+    "vitest": "^4.1.11"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}

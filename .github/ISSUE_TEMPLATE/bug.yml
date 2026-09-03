@@ -1,0 +1,37 @@
+name: Bug report
+description: Report a problem with the dashboard card
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Remove credentials, cookies, and private network details before submitting.
+  - type: input
+    id: card-version
+    attributes:
+      label: Card version
+    validations:
+      required: true
+  - type: input
+    id: integration-version
+    attributes:
+      label: TP-Link Easy Smart integration version
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Switch model, hardware revision, and firmware
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem and reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: console
+    attributes:
+      label: Browser console errors
+      render: text

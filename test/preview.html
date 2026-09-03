@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TP-Link Easy Smart Card preview</title>
+    <style>
+      :root {
+        --primary-color: #03a9f4;
+        --primary-text-color: #e8eaed;
+        --secondary-text-color: #9aa0a6;
+        --card-background-color: #202124;
+        --divider-color: #45474a;
+        --success-color: #4caf50;
+        --warning-color: #ffb300;
+        --error-color: #ef5350;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 36px;
+        background: #111315;
+        color: var(--primary-text-color);
+        font-family: Roboto, system-ui, sans-serif;
+      }
+
+      main {
+        width: min(760px, 100%);
+        margin: auto;
+      }
+
+      ha-card {
+        display: block;
+        border-radius: 18px;
+        background: var(--card-background-color);
+        box-shadow: 0 6px 24px rgb(0 0 0 / 35%);
+      }
+
+      ha-icon {
+        display: inline-grid;
+        width: 20px;
+        height: 20px;
+        place-items: center;
+        font-size: 12px;
+      }
+    </style>
+    <script>
+      class PreviewIcon extends HTMLElement {
+        connectedCallback() {
+          const icon = this.getAttribute("icon") || "";
+          this.textContent = icon.includes("download")
+            ? "↓"
+            : icon.includes("upload")
+              ? "↑"
+              : icon.includes("restart")
+                ? "↻"
+                : icon.includes("web")
+                  ? "◎"
+                  : "◆";
+        }
+      }
+      customElements.define("ha-icon", PreviewIcon);
+      customElements.define("ha-card", class extends HTMLElement {});
+
+      const deviceId = "preview-switch";
+      const mac = "aa:bb:cc:dd:ee:ff";
+      const entities = {};
+      const states = {};
+      const add = (entityId, key, state, attributes = {}) => {
+        entities[entityId] = {
+          entity_id: entityId,
+          unique_id: `${mac}_${key}_${mac}`,
+          platform: "tplink_easy_smart",
+          device_id: deviceId,
+        };
+        states[entityId] = { state, attributes };
+      };
+
+      const speeds = [
+        "1000M Full",
+        "100M Full",
+        "Link Down",
+        "1000M Full",
+        "Link Down",
+      ];
+      for (let port = 1; port <= 5; port += 1) {
+        const linked = speeds[port - 1] !== "Link Down";
+        add(
+          `binary_sensor.port_${port}`,
+          `port_${port}_state`,
+          linked ? "on" : "off",
+          {
+            speed: speeds[port - 1],
+            enabled: true,
+            speed_config: "Auto",
+            tx_estimated_bandwidth_mbps: linked ? port * 1.37 : 0,
+            rx_estimated_bandwidth_mbps: linked ? port * 3.82 : 0,
+            total_estimated_bandwidth_mbps: linked ? port * 5.19 : 0,
+          },
+        );
+        add(`switch.port_${port}_enabled`, `port_${port}_enabled`, "on");
+        add(
+          `switch.port_${port}_flow`,
+          `port_${port}_flow_control`,
+          port === 1 ? "on" : "off",
+        );
+        add(`select.port_${port}_speed`, `port_${port}_speed`, "Auto", {
+          options: ["Auto", "10M Half", "10M Full", "100M Full", "1000M Full"],
+        });
+        add(
+          `select.port_${port}_qos`,
+          `port_${port}_qos_priority`,
+          "2 (Normal)",
+          {
+            options: ["1 (Lowest)", "2 (Normal)", "3 (High)", "4 (Highest)"],
+          },
+        );
+        add(`sensor.port_${port}_cable`, `port_${port}_cable_status`, "normal");
+        add(
+          `sensor.port_${port}_length`,
+          `port_${port}_cable_length`,
+          String(8 + port),
+        );
+        add(`button.port_${port}_test`, `port_${port}_cable_test`, "unknown");
+      }
+      add("sensor.network", "network_info", "192.0.2.10", {
+        mac: "AA:BB:CC:DD:EE:FF",
+      });
+      add("switch.leds", "leds", "on");
+      add("switch.igmp", "igmp_snooping", "on");
+      add("switch.loop", "loop_prevention", "on");
+      add("button.reboot", "reboot", "unknown");
+      add("sensor.vlan", "8021q_vlan_configuration", "enabled");
+      add("sensor.pvid", "pvid_configuration", "configured");
+
+      window.previewHass = {
+        language: "fr",
+        entities,
+        states,
+        devices: {
+          [deviceId]: {
+            name: "Switch Bureau",
+            model: "TL-SG105E",
+            hw_version: "5.0",
+            sw_version: "1.0.0 Build 20250710",
+            configuration_url: "http://192.0.2.10",
+          },
+        },
+        callService: (...args) => console.info("service", ...args),
+      };
+    </script>
+  </head>
+  <body>
+    <main id="preview"></main>
+    <script type="module">
+      await import("../dist/tplink-easy-smart-card.js");
+      const card = document.createElement("tplink-easy-smart-card");
+      card.setConfig({
+        type: "custom:tplink-easy-smart-card",
+        device_id: "preview-switch",
+        port_labels: {
+          1: "Routeur",
+          2: "TV",
+          3: "Libre",
+          4: "NAS",
+          5: "Libre",
+        },
+      });
+      card.hass = window.previewHass;
+      document.querySelector("#preview").append(card);
+    </script>
+  </body>
+</html>
