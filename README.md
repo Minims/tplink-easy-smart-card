@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/images/tplink-easy-smart-icon.png" alt="TP-Link Easy Smart Card icon" width="128">
+</p>
+
 # TP-Link Easy Smart Card
 
 A modern Home Assistant dashboard card for switches managed by
@@ -9,6 +13,14 @@ requiring direct access to the switch from the browser.
 [![Release](https://img.shields.io/github/v/release/Minims/tplink-easy-smart-card)](https://github.com/Minims/tplink-easy-smart-card/releases/latest)
 [![License](https://img.shields.io/github/license/Minims/tplink-easy-smart-card)](LICENSE)
 [![Buy me a coffee](https://img.shields.io/badge/Buy_me_a_coffee-minims-FFDD00?logo=buymeacoffee&logoColor=000)](https://www.buymeacoffee.com/minims)
+
+## Preview
+
+<p align="center">
+  <img src="docs/images/dashboard-preview.png" alt="TP-Link Easy Smart Card detailed dashboard view" width="420">
+</p>
+
+Detailed view on a TL-SG105E V5. The network address shown in the screenshot is anonymized.
 
 ## Companion repositories
 
